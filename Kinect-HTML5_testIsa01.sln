@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect-HTML5_testIsa01", "Kinect-HTML5_testIsa01\Kinect-HTML5_testIsa01.csproj", "{39FCD93A-5DA1-4073-BC01-A0A3ACA6E0AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect_server", "Kinect_server\Kinect_server.csproj", "{D081F8F3-E851-4DF4-9280-D8A98A5EBB1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39FCD93A-5DA1-4073-BC01-A0A3ACA6E0AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FCD93A-5DA1-4073-BC01-A0A3ACA6E0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FCD93A-5DA1-4073-BC01-A0A3ACA6E0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FCD93A-5DA1-4073-BC01-A0A3ACA6E0AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D081F8F3-E851-4DF4-9280-D8A98A5EBB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D081F8F3-E851-4DF4-9280-D8A98A5EBB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D081F8F3-E851-4DF4-9280-D8A98A5EBB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D081F8F3-E851-4DF4-9280-D8A98A5EBB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
