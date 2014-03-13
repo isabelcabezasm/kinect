@@ -77,7 +77,7 @@ namespace Kinect_server
 
             _serverInitialized = true;
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         private static void InitilizeKinect()
@@ -123,56 +123,7 @@ namespace Kinect_server
                 {
                     reader.FrameArrived += Reader_FrameArrived;
                 }
-
-                //mock kinect
-               // GiveMeBodies();
-
-              
-
-                // convert the joint points to depth (display) space
-                //mockeamos un cuerpo un poco deforme
-                //List<Joint> joints = new List<Joint>();
-
-                //Joint j = new Joint();
-                //j.JointType = JointType.AnkleLeft;
-                //j.Position = new CameraSpacePoint();
-                //j.Position.X = 500;
-                //j.Position.Y = 200;
-                //j.TrackingState = TrackingState.Tracked;
-                //joints.Add(j);
-
-
- 
-                //j.JointType = JointType.AnkleLeft;
-                //j.Position = new CameraSpacePoint();
-                //j.Position.X = 30;
-                //j.Position.Y = 50;
-                //j.TrackingState = TrackingState.Tracked;
-                //joints.Add(j);
-
-
-  
-                //j.JointType = JointType.AnkleLeft;
-                //j.Position = new CameraSpacePoint();
-                //j.Position.X = 50;
-                //j.Position.Y = 100;
-                //j.TrackingState = TrackingState.Tracked;
-                //joints.Add(j);
-
-
-                //Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
-
-                //jointPoints.Add(JointType.AnkleLeft, new Point(1,1));
-                //jointPoints.Add(JointType.AnkleRight, new Point(1, 2));
-
-                //jointPoints.Add(JointType.ElbowLeft, new Point(1, 1));
-                //jointPoints.Add(JointType.ElbowRight, new Point(1, 2));
-
-                //jointPoints.Add(JointType.FootLeft, new Point(2, 1));
-                //jointPoints.Add(JointType.FootRight, new Point(2, 2));
-
-                //SendJoinPoints(joints);
-
+                
             }
 
 
@@ -329,14 +280,15 @@ namespace Kinect_server
                             if (stopwatch.IsRunning)
                             {
                                 stopwatch.Stop();
-                                fps = framesSinceUpdate / stopwatch.Elapsed.TotalSeconds;
+                                fps = framesSinceUpdate/stopwatch.Elapsed.TotalSeconds;
                                 stopwatch.Reset();
                             }
 
                             _nextStatusUpdate = DateTime.Now + TimeSpan.FromSeconds(1);
-                            var StatusText = string.Format("FPS = {0:N1} Time = {1}", fps, frameReference.RelativeTime - _startTime);
-                            
-                            Console.SetCursorPosition(0,5);
+                            var StatusText = string.Format("FPS = {0:N1} Time = {1}", fps,
+                                frameReference.RelativeTime - _startTime);
+
+                            Console.SetCursorPosition(0, 5);
                             Console.WriteLine(StatusText);
                         }
 
@@ -347,7 +299,7 @@ namespace Kinect_server
                         }
 
 
-                        
+
 
 
 
@@ -356,11 +308,24 @@ namespace Kinect_server
                         // those body objects will be re-used.
                         frame.GetAndRefreshBodyData(bodies);
 
-                        int sentbodies = 0;
-                        foreach (Body body in bodies)
+                        //int sentbodies = 0;
+
+                        //Body bodytracked;
+                        Body body = bodies[0];
+
+                        foreach (Body bodytr in bodies)
                         {
-                            if (body.IsTracked && sentbodies ==0)
+                            if (bodytr.IsTracked)
                             {
+                                //bodytracked = body;
+                                body = bodytr;
+                                break;
+
+                            }
+                        }
+
+                        if (body != null && body.IsTracked) { 
+                           
                                 //DrawClippedEdges(body, dc);
 
                                 IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
@@ -372,24 +337,10 @@ namespace Kinect_server
                                     DepthSpacePoint depthSpacePoint = _coordinateMapper.MapCameraPointToDepthSpace(joints[jointType].Position);
                                     jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                                 }
-
-                                //ahora dibujar...!!!
-
-                                //tu metelo ahí, que ya veremos como lo dibujas.
-                                // convert the joint points to depth (display) space
-                                //mockeamos un cuerpo un poco deforme
-                                //List<Joint> joints = new List<Joint>();
-
-                                //this.DrawBody(joints, jointPoints, dc);
-
-                                //this.DrawHand(body.HandLeftState, jointPoints[JointType.HandLeft], dc);
-                                //this.DrawHand(body.HandRightState, jointPoints[JointType.HandRight], dc);
-
+                                
                                 SendJoinPoints(jointPoints);
-                                sentbodies++; //manda solo un body, que nos podemos volver locos...
-
-                                // SendJoinPoints(joints);
-                            }
+                                //sentbodies++; //manda solo un body, que nos podemos volver locos...
+                            //}
                         }
 
 

@@ -31,23 +31,23 @@
             // 1. Get the data in JSON format.
             var jsonObject = JSON.parse(event.data);
             document.getElementById("textstatus").innerHTML = jsonObject["1"].value;
-            var array = jsonObject["1"].value.split(',');
+            
             
 
             context.clearRect(0, 0, canvas.width, canvas.height);
 
+            for (var j = 0; j < jsonObject.length; j++) { //cada articulación
 
-
+                var array = jsonObject[j].value.split(',');
                 context.fillStyle = "#FF0000";
                 context.beginPath();
                 context.arc(array[0], array[1], 10, 0, Math.PI * 2, true);
                 context.closePath();
                 context.fill();
+            }
 
 
-
-
-            //// 2. Display the skeleton joints.
+//// 2. Display the skeleton joints.
             //for (var i = 0; i < jsonObject.skeletons.length; i++) {
             //    for (var j = 0; j < jsonObject.skeletons[i].joints.length; j++) {
             //        var joint = jsonObject.skeletons[i].joints[j];
@@ -77,7 +77,7 @@
 
 
             // Inform the server about the update.
-            socket.send("Skeleton updated on: " + (new Date()).toDateString() + ", " + (new Date()).toTimeString());
+           // socket.send("Skeleton updated on: " + (new Date()).toDateString() + ", " + (new Date()).toTimeString());
         }
     };
 };
